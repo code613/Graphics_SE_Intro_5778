@@ -43,6 +43,16 @@ public class Point3D extends Point2D {
 		}
 		return 1;
 	}
+	//i added
+	public boolean compareTo2(Point3D point3D) {
+
+		if (((Point2D)this).compareTo((Point2D)point3D) == 0) {
+			if (this._z.compareTo(point3D._z) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public String toString(){
 		return "(" + _x.getCoordinate() + ", " +

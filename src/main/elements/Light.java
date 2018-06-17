@@ -2,6 +2,7 @@ package main.elements;
 
 import java.awt.Color;
 
+
 public abstract class Light {
 
 	protected Color _color;

@@ -2,12 +2,26 @@ package main.primitives;
 
 public class Material {
 
-	private double _Kd; // Diffusion attenuation coefficient 
+
+//********************Fields*****************//
+
+	private double _Kd; // Diffusion attenuation coefficient
 	private double _Ks; // Specular attenuation coefficient
 	private double _Kr; // Reflection coefficient (1 for mirror)
 	private double _Kt; // Refraction coefficient (1 for transparent) 
 	private double _n;  // Refraction index
-	
+
+// ***************** Constructors ********************** //
+
+
+
+		public Material(double _Kd, double _Ks, double _Kr, double _Kt, double _n) {
+			this._Kd = _Kd;
+			this._Ks = _Ks;
+			this._Kr = _Kr;
+			this._Kt = _Kt;
+			this._n = _n;
+		}
 	public Material(Material material){
 		this._Kd = material._Kd;
 		this._Ks = material._Ks;
@@ -23,6 +37,8 @@ public class Material {
 		_Kt = 0;
 		_n  = 1;
 	}
+		// ***************** Getters/Setters ********************** //
+
 
 	public double getKd() { return _Kd;	}
 	public double getKs() { return _Ks;	}
@@ -35,5 +51,9 @@ public class Material {
 	public void setKr(double _Kr) {	this._Kr = _Kr;	}
 	public void setKt(double _Kt) { this._Kt = _Kt; }
 	public void setN (double _n)  {	this._n = _n;	}
-	
-}
+
+		// ***************** Implementations   ******************** //
+
+		// ***************** Operations ******************** //
+
+	}

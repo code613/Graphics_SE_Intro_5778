@@ -53,7 +53,7 @@ public class LightingTest {
 		ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR +"Emmission test", 500, 500, 500, 500);
 		
 		Render render = new Render(imageWriter, scene);
-		
+
 		render.renderImage();
 		render.printGrid(50);
 		render.writeToImage();

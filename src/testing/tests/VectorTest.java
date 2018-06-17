@@ -6,6 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import main.primitives.Vector;
 
 public class VectorTest {
+	@Test
+	public void testcross2(){
+
+		//ok editeing here
+		double p1,p2,p3;
+		p1 = -0.0;
+		p2 = 1;
+		p3 = 1;
+		System.out.println(p1);
+		if (p1==-0.0){ p1 = 0.0;}
+		System.out.println(p1);
+	}
 
 	@Test
 	public void testAdd(){

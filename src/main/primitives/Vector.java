@@ -21,7 +21,6 @@ public class Vector implements Comparable<Vector>{
 	}
 	
 	public Vector(Point3D p1, Point3D p2){
-		
 		this(p2.getX().getCoordinate() - p1.getX().getCoordinate(),
 			 p2.getY().getCoordinate() - p1.getY().getCoordinate(),
 			 p2.getZ().getCoordinate() - p1.getZ().getCoordinate());
@@ -39,6 +38,9 @@ public class Vector implements Comparable<Vector>{
 	public int compareTo(Vector vector) {
 		return this._head.compareTo(vector._head);
 	}
+	public boolean compareTo2(Vector vector) {
+		return this._head.compareTo2(vector._head);
+	}//i added
 	
 	public String toString(){
 		return _head.toString();
@@ -75,10 +77,22 @@ public class Vector implements Comparable<Vector>{
 		double x2 = vector.getHead().getX().getCoordinate();
 		double y2 = vector.getHead().getY().getCoordinate();
 		double z2 = vector.getHead().getZ().getCoordinate();
-		
-		return new Vector(y1 * z2 - z1 * y2,
+
+		//ok editing here
+		//but this might be all extra.....
+		//dono it does have an effect...
+		double p1,p2,p3;
+		p1 = y1 * z2 - z1 * y2;
+		p2 = z1 * x2 - x1 * z2;
+		p3 = x1 * y2 - y1 * x2;
+		//i had a bug that 0.0 is not equal to -0.0 so that is what this is for.. below is original..
+		if (p1==-0.0){ p1 = 0.0;}
+		if (p2==-0.0){ p2 = 0.0;}
+		if (p3==-0.0){ p3 = 0.0;}
+		return new Vector(p1,p2,p3);
+		/*return new Vector(y1 * z2 - z1 * y2,
 						  z1 * x2 - x1 * z2,
-						  x1 * y2 - y1 * x2);
+						  x1 * y2 - y1 * x2);*/
 					
 	}
 

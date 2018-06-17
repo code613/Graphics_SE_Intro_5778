@@ -131,5 +131,6 @@ public class Triangle extends Geometry implements FlatGeometry{
 		return intersectionPoints;
 
 	}
+
 	
 }
