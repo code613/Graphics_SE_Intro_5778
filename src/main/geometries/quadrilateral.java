@@ -75,12 +75,13 @@ public class quadrilateral extends Geometry implements FlatGeometry{
         List<Point3D> L1,L2,L3;
         L1 = tri1.FindIntersections(ray);
         L2 = tri1.FindIntersections(ray);
-        boolean b = L1.addAll(L2);
-        boolean addAll = L3.addAll(L1);
+        L1.addAll(L2);
+        return L1;
+        /*boolean addAll = L3.addAll(L1);
         //right i have a problem combining the 2 list's i think
         //as the image just shows one triangle..
 
-        return L1;
+         L1;*/
     }
 
     @Override
