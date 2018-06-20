@@ -35,10 +35,10 @@ public class quadrantTest {
         quadrilateral2 square = new quadrilateral2(p10,p30,p20,p40);
 
 
-        Point3D p11= new Point3D(  350,  350, -200);
-        Point3D p21= new Point3D( -350, -350, -100);
-        Point3D p31= new Point3D(  350, -350, -200);
-        Point3D p41 =new Point3D( -350,  350, -100);
+        Point3D p11= new Point3D(  350,  350, -1000);
+        Point3D p21= new Point3D( -350, -350, 0);
+        Point3D p31= new Point3D(  350, -350, -1000);
+        Point3D p41 =new Point3D( -350,  350, 0);
         quadrilateral2 square2 = new quadrilateral2(p11,p31,p21,p41);
 
 
