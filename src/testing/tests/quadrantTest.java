@@ -29,20 +29,23 @@ public class quadrantTest {
 
         Point3D p1= new Point3D(  0,  3500, -1000);
         Point3D p2= new Point3D( 0, -3500, -1000);
-        Point3D p3= new Point3D(  0, 3500, -3000);
-        Point3D p4 =new Point3D( 0,  -3500, -3000);
+        Point3D p3= new Point3D(  0, -3500, -3000);
+        Point3D p4 =new Point3D( 0,  3500, -3000);
         Point3D p5= new Point3D(  500,  3500, -1000);
         Point3D p6= new Point3D( 500, -3500, -1000);
-        Point3D p7= new Point3D(  500, 3500, -3000);
-        Point3D p8 =new Point3D( 500,  -3500, -3000);
+        Point3D p7= new Point3D(  500, -3500, -3000);
+        Point3D p8 =new Point3D( 500,  3500, -3000);
 
         Point3D p55= new Point3D(  -2500,  3500, -1000);
         Point3D p55right= new Point3D(  -2500,  3500, -1500);
         Point3D p55left= new Point3D(  -2500,  3000, -1000);
         Point3D p55upr= new Point3D(  500,  3500, -1500);
         Point3D p55upl= new Point3D(  500,  3000, -1000);
-        quadrilateral2 p5legRight = new quadrilateral2(p55left,p55upl,p5,p55);
-        quadrilateral2 p5legLeft = new quadrilateral2(p55,p5,p55upr,p55right);
+        //bettween p5 and p55upr and p55upl we have an unclosed triangle
+        quadrilateral2 p5frontRightFacing= new quadrilateral2(p55left,p55,p5,p55upl);//this one is facing us
+        quadrilateral2 p5frontRightside = new quadrilateral2(p55,p5,p55upr,p55right);
+        /*quadrilateral2 p5legRight = new quadrilateral2(p55left,p55upl,p5,p55);
+        quadrilateral2 p5legLeft = new quadrilateral2(p55,p5,p55upr,p55right);*/
 
         Point3D p66= new Point3D( -2500, -3500, -1000);
         Point3D p77= new Point3D(  -2500, 3500, -3000);
@@ -61,8 +64,8 @@ public class quadrantTest {
         rightSide.setEmmission(new Color (50, 80, 40));
         leftSide.setEmmission(new Color (50, 80, 40));
         frontSide.setEmmission(new Color (50, 80, 40));
-        p5legRight.setEmmission(new Color (250, 0, 0));
-        p5legLeft.setEmmission(new Color (50, 50, 200));
+        p5frontRightFacing.setEmmission(new Color (250, 0, 0));
+        p5frontRightside.setEmmission(new Color (50, 50, 200));
 
         //quadrilateral2 leg1forNowsomething = new quadrilateral2(p10,p30,p20,p40);
 
@@ -88,8 +91,8 @@ public class quadrantTest {
         scene.addGeometry(frontSide);
 
         //now to add the legs
-        scene.addGeometry(p5legRight);
-        scene.addGeometry(p5legLeft);
+        scene.addGeometry(p5frontRightFacing);
+        scene.addGeometry(p5frontRightside);
         //scene.addGeometry(myLeg1);
         Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
         scene.setCamera(c1);
@@ -122,9 +125,6 @@ public class quadrantTest {
         Point3D p31= new Point3D(  350, -350, -1000);
         Point3D p41 =new Point3D( -350,  350, 0);
         quadrilateral2 square2 = new quadrilateral2(p11,p31,p21,p41);
-
-
-
 
 
 
