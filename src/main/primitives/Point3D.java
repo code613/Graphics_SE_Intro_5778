@@ -71,17 +71,25 @@ public class Point3D extends Point2D {
 	}
 
 	public void subtract(Vector vector) {
-		
+
 		this._x.subtract(vector.getHead().getX());
 		this._y.subtract(vector.getHead().getY());
 		this._z.subtract(vector.getHead().getZ());
-		
+
 	}
-	
+
 	public double distance(Point3D point){
 		return Math.sqrt(Math.pow(getX().getCoordinate() - point.getX().getCoordinate(), 2) +
 						 Math.pow(getY().getCoordinate() - point.getY().getCoordinate(), 2) +
 						 Math.pow(getZ().getCoordinate() - point.getZ().getCoordinate(), 2));
+	}
+
+	public static Point3D add(Point3D a, Point3D b){
+		return new Point3D(a._x.getCoordinate() + b._x.getCoordinate(),a._y.getCoordinate() + b._y.getCoordinate(),a._z.getCoordinate() + b._z.getCoordinate());
+	}
+
+	public static Point3D substract(Point3D a, Point3D b){
+		return new Point3D(a._x.getCoordinate() - b._x.getCoordinate(),a._y.getCoordinate() - b._y.getCoordinate(),a._z.getCoordinate() - b._z.getCoordinate());
 	}
 
 }

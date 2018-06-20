@@ -55,6 +55,14 @@ public class Vector implements Comparable<Vector>{
 	public void subtract (Vector vector ){
 		this._head.subtract(vector);
 	}
+
+	//from asher..
+	public Vector multiplyByScalar(double scalar) {
+		return new Vector(
+				this.getHead().getX().getCoordinate() * scalar,
+				this.getHead().getY().getCoordinate() * scalar,
+				this.getHead().getZ().getCoordinate() * scalar);
+	}
 	
 	public void scale(double scalingFacor){
 		
@@ -137,6 +145,11 @@ public class Vector implements Comparable<Vector>{
 		return x1 * x2 + y1 * y2 + z1 * z2;
 		
 	}
-
+	public static double dotProduct(Vector a, Vector b) {
+		double result = a.getHead().getX().getCoordinate() * b.getHead().getX().getCoordinate() +
+				a.getHead().getY().getCoordinate() * b.getHead().getY().getCoordinate() +
+				a.getHead().getZ().getCoordinate() * b.getHead().getZ().getCoordinate();
+		return result;
+	}
 
 }
