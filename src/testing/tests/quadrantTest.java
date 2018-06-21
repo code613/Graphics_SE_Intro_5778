@@ -25,21 +25,21 @@ public class quadrantTest {
 
     @Test
     public void FinalbiuldTableTest(){
-        Point3D Point3D topRightNear= new Point3D(  500,  3500, -1000);
-        Point3D Point3D topLeftNear= new Point3D( 500, -3500, -1000);
-        Point3D Point3D topLeftFar= new Point3D(  500, -3500, -3000);
-        Point3D Point3D topRightFar =new Point3D( 500,  3500, -3000);
-        Point3D Point3D bottomRightNear= new Point3D(  0,  3500, -1000);
-        Point3D Point3D bottomLeftFar= new Point3D( 0, -3500, -1000);
-        Point3D Point3D bottomRightNear= new Point3D(  0, -3500, -3000);
-        Point3D Point3D bottomLeftNear =new Point3D( 0,  3500, -3000);
+        Point3D topRightNear= new Point3D(  500,  3500, -1000);
+        Point3D topLeftNear= new Point3D( 500, -3500, -1000);
+        Point3D topLeftFar= new Point3D(  500, -3500, -3000);
+        Point3D topRightFar =new Point3D( 500,  3500, -3000);
+        Point3D bottomRightNear= new Point3D(  0,  3500, -1000);
+        Point3D bottomLeftNear= new Point3D( 0, -3500, -1000);
+        Point3D bottomLeftFar= new Point3D(  0, -3500, -3000);
+        Point3D bottomRightFar =new Point3D( 0,  3500, -3000);
 
 
 
 
 
 
-        
+
 
     }
 
@@ -51,7 +51,7 @@ public class quadrantTest {
                 topRightFarp8
         bottomRightNearp1
                 bottomLeftFarp2
-        bottomRightNearp3
+        bottomLeftFarp3
                 bottomLeftNearp4 */
         Point3D p1= new Point3D(  0,  3500, -1000);
         Point3D p2= new Point3D( 0, -3500, -1000);
