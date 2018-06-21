@@ -23,10 +23,36 @@ public class quadrantTest {
 
     private final String IMAGES_TEST_DIR = "/src/testing/images/";
 
+    @Test
+    public void FinalbiuldTableTest(){
+        Point3D Point3D topRightNear= new Point3D(  500,  3500, -1000);
+        Point3D Point3D topLeftNear= new Point3D( 500, -3500, -1000);
+        Point3D Point3D topLeftFar= new Point3D(  500, -3500, -3000);
+        Point3D Point3D topRightFar =new Point3D( 500,  3500, -3000);
+        Point3D Point3D bottomRightNear= new Point3D(  0,  3500, -1000);
+        Point3D Point3D bottomLeftFar= new Point3D( 0, -3500, -1000);
+        Point3D Point3D bottomRightNear= new Point3D(  0, -3500, -3000);
+        Point3D Point3D bottomLeftNear =new Point3D( 0,  3500, -3000);
+
+
+
+
+
+
+        
+
+    }
 
     @Test
     public void biuldTableTest(){
-
+/*     topRightNearp5
+                topLeftNearp6
+        topLeftFarp7
+                topRightFarp8
+        bottomRightNearp1
+                bottomLeftFarp2
+        bottomRightNearp3
+                bottomLeftNearp4 */
         Point3D p1= new Point3D(  0,  3500, -1000);
         Point3D p2= new Point3D( 0, -3500, -1000);
         Point3D p3= new Point3D(  0, -3500, -3000);
@@ -36,15 +62,16 @@ public class quadrantTest {
         Point3D p7= new Point3D(  500, -3500, -3000);
         Point3D p8 =new Point3D( 500,  3500, -3000);
 
-        Point3D p55= new Point3D(  -2500,  3500, -1000);
-        Point3D p55right= new Point3D(  -2500,  3500, -1500);
-        Point3D p55left= new Point3D(  -2500,  3000, -1000);
-        Point3D p55upr= new Point3D(  500,  3500, -1500);
-        Point3D p55upl= new Point3D(  500,  3000, -1000);
+        Point3D p55= new Point3D(  -2500,  3500, -1100);
+        Point3D p55right= new Point3D(  -2500,  3500, -1400);
+        Point3D p55left= new Point3D(  -2500,  3000, -1100);
+        Point3D p55upr= new Point3D(  500,  3500, -1400);
+        Point3D p55upl= new Point3D(  500,  3000, -1100);
         //bettween p5 and p55upr and p55upl we have an unclosed triangle
+
         quadrilateral2 p5frontRightFacing= new quadrilateral2(p55left,p55,p5,p55upl);//this one is facing us
         quadrilateral2 p5frontRightside = new quadrilateral2(p55,p5,p55upr,p55right);
-        /*quadrilateral2 p5legRight = new quadrilateral2(p55left,p55upl,p5,p55);
+/*        quadrilateral2 p5legRight = new quadrilateral2(p55left,p55upl,p5,p55);
         quadrilateral2 p5legLeft = new quadrilateral2(p55,p5,p55upr,p55right);*/
 
         Point3D p66= new Point3D( -2500, -3500, -1000);
@@ -64,20 +91,20 @@ public class quadrantTest {
         rightSide.setEmmission(new Color (50, 80, 40));
         leftSide.setEmmission(new Color (50, 80, 40));
         frontSide.setEmmission(new Color (50, 80, 40));
+
         p5frontRightFacing.setEmmission(new Color (250, 0, 0));
         p5frontRightside.setEmmission(new Color (50, 50, 200));
-
         //quadrilateral2 leg1forNowsomething = new quadrilateral2(p10,p30,p20,p40);
 
 
-       // AshCylinderLim(double myRadius, Point3D tp, Ray myRay, Color e, Material m)
-        /*double myRadius  = 20;
+     //AshCylinderLim(double myRadius, Point3D tp, Ray myRay, Color e, Material m)
+/*        double myRadius  = 20;
         Point3D tp1,tp = p5;
         tp1 = p5;
         tp1.setX(new Coordinate(-1000));
         Ray myRay = new Ray(tp1,new Vector(1,0,0));
-        Color e = Color.cyan;
-        Material m = new Material(0.7,0.8,1,2,8);
+        Color e = new Color (0, 250, 0);
+        Material m = new Material();//0.7,0.8,1,2,8);
         AshCylinderLim myLeg1 = new AshCylinderLim(myRadius,tp,myRay,e,m);*/
 
 
@@ -89,6 +116,7 @@ public class quadrantTest {
         scene.addGeometry(leftSide);
         scene.addGeometry(backSide);
         scene.addGeometry(frontSide);
+       // scene.addGeometry(myLeg1);
 
         //now to add the legs
         scene.addGeometry(p5frontRightFacing);
