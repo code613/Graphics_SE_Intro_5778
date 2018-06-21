@@ -89,4 +89,12 @@ public class quadrilateral extends Geometry implements FlatGeometry{
         return tri1.getNormal(point);
     }
     // ***************** Operations ******************** //
+
+    @Override
+    public String toString() {
+        return "quadrilateral{" +
+                "tri1=" + tri1 +
+                ", tri2=" + tri2 +
+                '}';
+    }
 }
