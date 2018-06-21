@@ -20,6 +20,70 @@ public class quadrantTest {
     private final String IMAGES_TEST_DIR = "/src/testing/images/";
 
     @Test
+    public void rightBackLegTest() {
+        double X1Table = 500  ,X2Table = 0;
+        double Y1Table = 3500 ,Y2Table = -3500;
+        double Z1Table = -1000,Z2Table = -3000;
+        double LegX1 = X2Table,LegX2 = -2500;//only these number's are correct
+        double Y1RightLeg =  2700,Y2RightLeg =  3000;//really this is aY +c but for simple just make it Y same for all of them..
+        double Y1leftLeg  = -3200,Y2leftLeg  = -2500;
+        double Z1FrontLeg = -1200,Z2FrontLeg = -1300;
+        double Z1BackLeg  = -3300,Z2BackLeg  = -3200;
+
+        double X1BackRightLeg = LegX1, X2BackRightLeg = LegX2;
+        double Y1BackRightLeg = Y1RightLeg,Y2BackRightLeg = Y2RightLeg;
+        double Z1BackRightLeg = -3300,Z2BackRightLeg = -3200;
+
+
+        //Back right Leg
+        Point3D BRLtopRightNear = new Point3D(X1BackRightLeg, Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftNear = new Point3D(  X1BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftFar = new Point3D(X1BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLtopRightFar = new Point3D(  X1BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
+        Point3D BRLbottomRightNear = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftNear = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftFar = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLbottomRightFar = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
+
+        quadrilateral2 BRLbottomOfBox = new quadrilateral2(BRLbottomLeftFar, BRLbottomRightFar, BRLbottomRightNear, BRLbottomLeftNear);
+        quadrilateral2 BRLtopOfBox = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLtopRightNear, BRLtopLeftNear);
+        quadrilateral2 BRLrightSide = new quadrilateral2(BRLtopRightFar, BRLtopRightNear, BRLbottomRightNear, BRLbottomRightFar);
+        quadrilateral2 BRLleftSide = new quadrilateral2(BRLtopLeftFar, BRLtopLeftNear, BRLbottomLeftNear, BRLbottomLeftFar);
+        quadrilateral2 BRLbackSide = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLbottomRightFar, BRLbottomLeftFar);
+        quadrilateral2 BRLfrontSide = new quadrilateral2(BRLtopLeftNear, BRLtopRightNear, BRLbottomRightNear, BRLbottomLeftNear);
+
+        Color BRLColor = new Color (186, 185, 124);
+
+        //Back right Leg
+        BRLbottomOfBox.setEmmission(BRLColor );
+        BRLtopOfBox.setEmmission(BRLColor);
+        BRLrightSide.setEmmission(BRLColor);
+        BRLleftSide.setEmmission(BRLColor);
+        BRLbackSide.setEmmission(BRLColor);
+        BRLfrontSide.setEmmission(BRLColor);
+
+        Scene scene = new Scene();
+        scene.setScreenDistance(50);
+
+        //Back right Leg
+        scene.addGeometry(BRLbottomOfBox);
+        scene.addGeometry(BRLtopOfBox);
+        scene.addGeometry(BRLrightSide);
+        scene.addGeometry(BRLleftSide);
+        scene.addGeometry(BRLbackSide);
+        scene.addGeometry(BRLfrontSide);
+
+        Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+        scene.setCamera(c1);
+
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "BackRightLeg test" , 500, 500, 500, 500);
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+        render.writeToImage();
+
+
+}
+    @Test
     public void FinalbiuldTableTest() {
 
         // ***************** values ********************** //
@@ -27,35 +91,36 @@ public class quadrantTest {
         double Y1Table = 3500 ,Y2Table = -3500;
         double Z1Table = -1000,Z2Table = -3000;
 
+        //THESE ARE THE CRITICAL NUMBERS....BEWARE....
         double LegX1 = X2Table,LegX2 = -2500;//only these number's are correct
         double Y1RightLeg =  2700,Y2RightLeg =  3000;//really this is aY +c but for simple just make it Y same for all of them..
         double Y1leftLeg  = -3200,Y2leftLeg  = -2500;
         double Z1FrontLeg = -1200,Z2FrontLeg = -1300;
-        double Z1BackLeg  = -3300,Z2BackLeg  = -3200;
+        double Z1BackLeg  = -2800,Z2BackLeg  = -2700;
         //ok now legs
         //FrontRightLeg
-        double X1FrontRightLeg = LegX1,X2FrontRightLeg = LegX2;
-        double Y1FrontRightLeg =  Y1RightLeg,Y2FrontRightLeg =  Y2RightLeg;
-        double Z1FrontRightLeg = -1200,Z2FrontRightLeg = -1300;
+        double X1FrontRightLeg = LegX1      ,X2FrontRightLeg = LegX2;
+        double Y1FrontRightLeg = Y1RightLeg ,Y2FrontRightLeg =  Y2RightLeg;
+        double Z1FrontRightLeg = Z1FrontLeg ,Z2FrontRightLeg = Z2FrontLeg;
 
         //leftNearLeg
-        double leftNearLegX1 = LegX1,leftNearLegX2 = LegX2;//leftNearLegX1 - 2500;
-        double leftNearLegY1 = -2800,leftNearLegY2 = -2300;//leftNearLegY1 + 500;
-        double leftNearLegZ1 = -1200,leftNearLegZ2 =-1300 ;// leftNearLegZ1 - 50;
+        double leftNearLegX1 = LegX1,     leftNearLegX2 = LegX2;//leftNearLegX1 - 2500;
+        double leftNearLegY1 = Y1leftLeg, leftNearLegY2 = Y2leftLeg;//leftNearLegY1 + 500;
+        double leftNearLegZ1 = Z1FrontLeg,leftNearLegZ2 = Z2FrontLeg;// leftNearLegZ1 - 50;
         //leftFarLeg
-        double leftFarLegX1 = LegX1   ,leftFarLegX2 = LegX2;
-        double leftFarLegY1 = -3200    ,leftFarLegY2 = -2500;
-        double leftFarLegZ1 = -3750    ,leftFarLegZ2 = -3500;
+        double leftFarLegX1 = LegX1       ,leftFarLegX2 = LegX2;
+        double leftFarLegY1 = Y1leftLeg   ,leftFarLegY2 = Y2leftLeg;
+        double leftFarLegZ1 = Z1BackLeg   ,leftFarLegZ2 = Z2BackLeg;
 
         //BackRightLeg  um these numbers arn't right.......
-        double X1BackRightLeg = LegX1, X2BackRightLeg = LegX2;
+        double X1BackRightLeg = LegX1,     X2BackRightLeg = LegX2;
         double Y1BackRightLeg = Y1RightLeg,Y2BackRightLeg = Y2RightLeg;
-        double Z1BackRightLeg = -3400,Z2BackRightLeg = -3300;
+        double Z1BackRightLeg = Z1BackLeg, Z2BackRightLeg = Z2BackLeg;
 
         //Flore
-        double FloreBottom =  LegX2;//so that the legs are on the flore nooo it is floor!!!  ok refacter later....
-        double FloreY1 = -10000,FloreY2 = 10000;
-        double FloreZ1 = 10000,FloreZ2 = -10000;
+        double FloreBottom =  LegX2-5;//so that the legs are on the flore nooo it is floor!!!  ok refacter later....
+        double FloreY1 = -10000,FloreY2 =  10000;
+        double FloreZ1 =  10000,FloreZ2 = -10000;
 
         // ***************** Point3D ********************** //
         //table
@@ -151,12 +216,18 @@ public class quadrantTest {
 
 
         // ***************** Color's ********************** //
-        Color TableColor = new Color (186, 185, 124);
-        Color FRLColor = new Color (0, 250, 0);
+        Color TableColor = new Color (186, 163, 138);
+        Color TablesideColor = new Color (186, 129, 41);
+        Color GrandColer =  new Color (171, 186, 54);
+        Color FRLColor = GrandColer;
+        Color FLLColor = GrandColer;
+        Color BLLColor = GrandColer;
+        Color BRLColor = GrandColer;
+       /* Color FRLColor = new Color (171, 186, 54);
         Color FLLColor = new Color (0, 0, 250);
         Color BLLColor = new Color (250, 0, 0);
-        Color BRLColor = new Color (186, 185, 124);
-        Color FloreColor = new Color (39, 75, 78);
+        Color BRLColor = new Color (186, 185, 124);*/
+        Color FloreColor = new Color (170, 242, 243);
        /* Color TableColor = new Color (186, 185, 124);
         Color FRLColor = new Color (186, 185, 124);
         Color FLLColor = new Color (186, 185, 124);
@@ -166,10 +237,12 @@ public class quadrantTest {
         //table
         bottomOfBox.setEmmission(TableColor );
         topOfBox.setEmmission(TableColor);
-        rightSide.setEmmission(TableColor);
-        leftSide.setEmmission(TableColor);
-        backSide.setEmmission(TableColor);
-        frontSide.setEmmission(TableColor);
+        rightSide.setEmmission(TablesideColor);
+        leftSide.setEmmission(TablesideColor);
+        backSide.setEmmission(TablesideColor);
+        frontSide.setEmmission(TablesideColor);
+
+        //topOfBox.setShininess(20);
         //and now legs
         //FrontRightLeg
         FRLbottomOfBox.setEmmission(FRLColor );
@@ -277,11 +350,14 @@ public class quadrantTest {
 
         // ***************** Light ********************** //
 
-        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, -200, -150),
-                new Vector(2, 2, -3), 0.1, 0.00001, 0.000005));
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(2000, -200, 1150),
+                new Vector(-2, 2, -3), 0.1, 0.00001, 0.000005));
 
-        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, -200, -100),
-                new Vector(2, 2, -3), 0, 0.00001, 0.000005));
+        scene.addLight(new SpotLight(new Color(100, 255, 100), new Point3D(4200, 1000, 150),
+                new Vector(-2, -2, -3), 0.1, 0.00001, 0.000005));
+
+        scene.addLight(new SpotLight(new Color(100, 100, 255), new Point3D(1200, -200, -4000),
+                new Vector(-2, 2, 3), 0, 0.00001, 0.000005));
 
         // ***************** Flore ********************** //
         Point3D bottomRightNearFloreConer = new Point3D(FloreBottom,  FloreY2, FloreZ2);//
