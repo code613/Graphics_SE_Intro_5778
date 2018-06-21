@@ -10,37 +10,431 @@ import main.primitives.*;
 import java.awt.Color;
 
 
-import main.elements.PointLight;
 import main.elements.SpotLight;
-import main.geometries.Sphere;
-import main.geometries.Triangle;
 import main.renderer.ImageWriter;
 import main.renderer.Render;
 import main.scenes.*;
-import main.geometries.AshCylinderLim;
 import org.junit.jupiter.api.Test;
 public class quadrantTest {
 
     private final String IMAGES_TEST_DIR = "/src/testing/images/";
 
     @Test
-    public void FinalbiuldTableTest(){
-        Point3D topRightNear= new Point3D(  500,  3500, -1000);
-        Point3D topLeftNear= new Point3D( 500, -3500, -1000);
-        Point3D topLeftFar= new Point3D(  500, -3500, -3000);
-        Point3D topRightFar =new Point3D( 500,  3500, -3000);
-        Point3D bottomRightNear= new Point3D(  0,  3500, -1000);
-        Point3D bottomLeftNear= new Point3D( 0, -3500, -1000);
-        Point3D bottomLeftFar= new Point3D(  0, -3500, -3000);
-        Point3D bottomRightFar =new Point3D( 0,  3500, -3000);
+    public void FinalbiuldTableTest() {
+
+        // ***************** values ********************** //
+        double X1Table = 500,X2Table = 0;
+        double Y1Table = 3500,Y2Table = -3500;
+        double Z1Table = -1000,Z2Table = -3000;
+
+        //ok now legs
+        //FrontRightLeg
+        double X1FrontRightLeg = 0, X2FrontRightLeg = -2500;
+        double Y1FrontRightLeg = 2700,Y2FrontRightLeg = 3000;
+        double Z1FrontRightLeg = -1200,Z2FrontRightLeg = -1300;
+
+        //leftNearLeg
+        double leftNearLegX1 = 0,leftNearLegX2 = leftNearLegX1 - 2500;
+        double leftNearLegY1 = -2800,leftNearLegY2 = leftNearLegY1 + 500;
+        double leftNearLegZ1 = -1200,leftNearLegZ2 = leftNearLegZ1 - 50;
+        //leftFarLeg
+        double leftFarLegX1 = 0,leftFarLegX2 = leftFarLegX1 - 2500;
+        double leftFarLegY1 = -3000 +200,leftFarLegY2 = leftFarLegY1 + 500 +200;
+        double leftFarLegZ1 = -3500 +50 +200,leftFarLegZ2 = leftFarLegZ1 - 50 +200;
+
+        //BackRightLeg  um these numbers arn't right.......
+        double X1BackRightLeg = 0, X2BackRightLeg = -2500;
+        double Y1BackRightLeg = 2700,Y2BackRightLeg = 3000;
+        double Z1BackRightLeg = -1200,Z2BackRightLeg = -1300;
+
+        // ***************** Point3D ********************** //
+        //table
+        Point3D topRightNear = new Point3D(X1Table, Y1Table, Z1Table);
+        Point3D topLeftNear = new Point3D(X1Table, Y2Table, Z1Table);
+        Point3D topLeftFar = new Point3D(X1Table, Y2Table, Z2Table);
+        Point3D topRightFar = new Point3D(X1Table, Y1Table, Z2Table);
+        Point3D bottomRightNear = new Point3D(X2Table, Y1Table, Z1Table);
+        Point3D bottomLeftNear = new Point3D(X2Table, Y2Table, Z1Table);
+        Point3D bottomLeftFar = new Point3D(X2Table, Y2Table, Z2Table);
+        Point3D bottomRightFar = new Point3D(X2Table, Y1Table, Z2Table);
+
+        //ok now legs
+        //FrontRightLeg
+        Point3D FRLtopRightNear = new Point3D(X1FrontRightLeg, Y2FrontRightLeg, Z2FrontRightLeg);//
+        Point3D FRLtopLeftNear = new Point3D(  X1FrontRightLeg, Y1FrontRightLeg, Z2FrontRightLeg);//
+        Point3D FRLtopLeftFar = new Point3D(X1FrontRightLeg, Y1FrontRightLeg, Z1FrontRightLeg);
+        Point3D FRLtopRightFar = new Point3D(  X1FrontRightLeg,  Y2FrontRightLeg, Z1FrontRightLeg);//
+        Point3D FRLbottomRightNear = new Point3D(X2FrontRightLeg,  Y2FrontRightLeg, Z2FrontRightLeg);//
+        Point3D FRLbottomLeftNear = new Point3D(X2FrontRightLeg, Y1FrontRightLeg, Z2FrontRightLeg);//
+        Point3D FRLbottomLeftFar = new Point3D(X2FrontRightLeg, Y1FrontRightLeg, Z1FrontRightLeg);
+        Point3D FRLbottomRightFar = new Point3D(X2FrontRightLeg,  Y2FrontRightLeg, Z1FrontRightLeg);//
+
+        //LeftNearLeg or Front Left Leg
+        Point3D FLLtopRightNear = new Point3D(leftNearLegX1, leftNearLegY2, leftNearLegZ2);//
+        Point3D FLLtopLeftNear = new Point3D(  leftNearLegX1,  leftNearLegY1, leftNearLegZ2);//
+        Point3D FLLtopLeftFar = new Point3D(leftNearLegX1, leftNearLegY1, leftNearLegZ1);
+        Point3D FLLtopRightFar = new Point3D(  leftNearLegX1,  leftNearLegY2, leftNearLegZ1);//
+        Point3D FLLbottomRightNear = new Point3D(leftNearLegX2,  leftNearLegY2, leftNearLegZ2);//
+        Point3D FLLbottomLeftNear = new Point3D(  leftNearLegX2,  leftNearLegY1, leftNearLegZ2);//
+        Point3D FLLbottomLeftFar = new Point3D(leftNearLegX2, leftNearLegY1, leftNearLegZ1);
+        Point3D FLLbottomRightFar = new Point3D(  leftNearLegX2,  leftNearLegY2, leftNearLegZ1);//
+
+        //leftFarLeg  or Back Left Leg
+        Point3D BLLtopRightNear = new Point3D(leftFarLegX1, leftFarLegY2, leftFarLegZ2);//
+        Point3D BLLtopLeftNear = new Point3D(  leftFarLegX1,  leftFarLegY1, leftFarLegZ2);//
+        Point3D BLLtopLeftFar = new Point3D(leftFarLegX1, leftFarLegY1, leftFarLegZ1);
+        Point3D BLLtopRightFar = new Point3D(  leftFarLegX1,  leftFarLegY2, leftFarLegZ1);//
+        Point3D BLLbottomRightNear = new Point3D(leftFarLegX2,  leftFarLegY2, leftFarLegZ2);//
+        Point3D BLLbottomLeftNear = new Point3D(  leftFarLegX2,  leftFarLegY1, leftFarLegZ2);//
+        Point3D BLLbottomLeftFar = new Point3D(leftFarLegX2, leftFarLegY1, leftFarLegZ1);
+        Point3D BLLbottomRightFar = new Point3D(  leftFarLegX2,  leftFarLegY2, leftFarLegZ1);//
+
+        //Back right Leg
+        Point3D BRLtopRightNear = new Point3D(X1BackRightLeg, Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftNear = new Point3D(  X1BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftFar = new Point3D(X1BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLtopRightFar = new Point3D(  X1BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
+        Point3D BRLbottomRightNear = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftNear = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftFar = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLbottomRightFar = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
+
+        // ***************** quadrilateral's ********************** //
+        //table
+        quadrilateral2 bottomOfBox = new quadrilateral2(bottomLeftFar, bottomRightFar, bottomRightNear, bottomLeftNear);
+        quadrilateral2 topOfBox = new quadrilateral2(topLeftFar, topRightFar, topRightNear, topLeftNear);
+        quadrilateral2 rightSide = new quadrilateral2(topRightFar, topRightNear, bottomRightNear, bottomRightFar);
+        quadrilateral2 leftSide = new quadrilateral2(topLeftFar, topLeftNear, bottomLeftNear, bottomLeftFar);
+        quadrilateral2 backSide = new quadrilateral2(topLeftFar, topRightFar, bottomRightFar, bottomLeftFar);
+        quadrilateral2 frontSide = new quadrilateral2(topLeftNear, topRightNear, bottomRightNear, bottomLeftNear);
+
+        //and now legs
+        //FrontRightLeg
+        quadrilateral2 FRLbottomOfBox = new quadrilateral2(FRLbottomLeftFar, FRLbottomRightFar, FRLbottomRightNear, FRLbottomLeftNear);
+        quadrilateral2 FRLtopOfBox = new quadrilateral2(FRLtopLeftFar, FRLtopRightFar, FRLtopRightNear, FRLtopLeftNear);
+        quadrilateral2 FRLrightSide = new quadrilateral2(FRLtopRightFar, FRLtopRightNear, FRLbottomRightNear, FRLbottomRightFar);
+        quadrilateral2 FRLleftSide = new quadrilateral2(FRLtopLeftFar, FRLtopLeftNear, FRLbottomLeftNear, FRLbottomLeftFar);
+        quadrilateral2 FRLbackSide = new quadrilateral2(FRLtopLeftFar, FRLtopRightFar, FRLbottomRightFar, FRLbottomLeftFar);
+        quadrilateral2 FRLfrontSide = new quadrilateral2(FRLtopLeftNear, FRLtopRightNear, FRLbottomRightNear, FRLbottomLeftNear);
+
+        //LeftNearLeg or Front Left Leg
+        quadrilateral2 FLLbottomOfBox = new quadrilateral2(FLLbottomLeftFar, FLLbottomRightFar, FLLbottomRightNear, FLLbottomLeftNear);
+        quadrilateral2 FLLtopOfBox = new quadrilateral2(FLLtopLeftFar, FLLtopRightFar, FLLtopRightNear, FLLtopLeftNear);
+        quadrilateral2 FLLrightSide = new quadrilateral2(FLLtopRightFar, FLLtopRightNear, FLLbottomRightNear, FLLbottomRightFar);
+        quadrilateral2 FLLleftSide = new quadrilateral2(FLLtopLeftFar, FLLtopLeftNear, FLLbottomLeftNear, FLLbottomLeftFar);
+        quadrilateral2 FLLbackSide = new quadrilateral2(FLLtopLeftFar, FLLtopRightFar, FLLbottomRightFar, FLLbottomLeftFar);
+        quadrilateral2 FLLfrontSide = new quadrilateral2(FLLtopLeftNear, FLLtopRightNear, FLLbottomRightNear, FLLbottomLeftNear);
+        //leftFarLeg  or Back Left Leg
+        quadrilateral2 BLLbottomOfBox = new quadrilateral2(BLLbottomLeftFar, BLLbottomRightFar, BLLbottomRightNear, BLLbottomLeftNear);
+        quadrilateral2 BLLtopOfBox = new quadrilateral2(BLLtopLeftFar, BLLtopRightFar, BLLtopRightNear, BLLtopLeftNear);
+        quadrilateral2 BLLrightSide = new quadrilateral2(BLLtopRightFar, BLLtopRightNear, BLLbottomRightNear, BLLbottomRightFar);
+        quadrilateral2 BLLleftSide = new quadrilateral2(BLLtopLeftFar, BLLtopLeftNear, BLLbottomLeftNear, BLLbottomLeftFar);
+        quadrilateral2 BLLbackSide = new quadrilateral2(BLLtopLeftFar, BLLtopRightFar, BLLbottomRightFar, BLLbottomLeftFar);
+        quadrilateral2 BLLfrontSide = new quadrilateral2(BLLtopLeftNear, BLLtopRightNear, BLLbottomRightNear, BLLbottomLeftNear);
+        //Back right Leg BRL
+        quadrilateral2 BRLbottomOfBox = new quadrilateral2(BRLbottomLeftFar, BRLbottomRightFar, BRLbottomRightNear, BRLbottomLeftNear);
+        quadrilateral2 BRLtopOfBox = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLtopRightNear, BRLtopLeftNear);
+        quadrilateral2 BRLrightSide = new quadrilateral2(BRLtopRightFar, BRLtopRightNear, BRLbottomRightNear, BRLbottomRightFar);
+        quadrilateral2 BRLleftSide = new quadrilateral2(BRLtopLeftFar, BRLtopLeftNear, BRLbottomLeftNear, BRLbottomLeftFar);
+        quadrilateral2 BRLbackSide = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLbottomRightFar, BRLbottomLeftFar);
+        quadrilateral2 BRLfrontSide = new quadrilateral2(BRLtopLeftNear, BRLtopRightNear, BRLbottomRightNear, BRLbottomLeftNear);
 
 
+        // ***************** Color's ********************** //
+        Color TableColor = new Color (186, 185, 124);
+        Color FRLColor = new Color (0, 250, 0);
+        Color FLLColor = new Color (0, 0, 250);
+        Color BLLColor = new Color (250, 0, 0);
+        Color BRLColor = new Color (186, 185, 124);
+       /* Color TableColor = new Color (186, 185, 124);
+        Color FRLColor = new Color (186, 185, 124);
+        Color FLLColor = new Color (186, 185, 124);
+        Color BLLColor = new Color (186, 185, 124);
+        Color BRLColor = new Color (186, 185, 124);*/
+
+        //table
+        bottomOfBox.setEmmission(TableColor );
+        topOfBox.setEmmission(TableColor);
+        rightSide.setEmmission(TableColor);
+        leftSide.setEmmission(TableColor);
+        backSide.setEmmission(TableColor);
+        frontSide.setEmmission(TableColor);
+        //and now legs
+        //FrontRightLeg
+        FRLbottomOfBox.setEmmission(FRLColor );
+        FRLtopOfBox.setEmmission(FRLColor);
+        FRLrightSide.setEmmission(FRLColor);
+        FRLleftSide.setEmmission(FRLColor);
+        FRLbackSide.setEmmission(FRLColor);
+        FRLfrontSide.setEmmission(FRLColor);
+
+        //LeftNearLeg or Front Left Leg
+        FLLbottomOfBox.setEmmission(FLLColor );
+        FLLtopOfBox.setEmmission(FLLColor);
+        FLLrightSide.setEmmission(FLLColor);
+        FLLleftSide.setEmmission(FLLColor);
+        FLLbackSide.setEmmission(FLLColor);
+        FLLfrontSide.setEmmission(FLLColor);
+
+        //leftFarLeg  or Back Left Leg
+        BLLbottomOfBox.setEmmission(BLLColor );
+        BLLtopOfBox.setEmmission(BLLColor);
+        BLLrightSide.setEmmission(BLLColor);
+        BLLleftSide.setEmmission(BLLColor);
+        BLLbackSide.setEmmission(BLLColor);
+        BLLfrontSide.setEmmission(BLLColor);
+
+        //Back right Leg
+        BRLbottomOfBox.setEmmission(BRLColor );
+        BRLtopOfBox.setEmmission(BRLColor);
+        BRLrightSide.setEmmission(BRLColor);
+        BRLleftSide.setEmmission(BRLColor);
+        BRLbackSide.setEmmission(BRLColor);
+        BRLfrontSide.setEmmission(BRLColor);
+
+        // ***************** Scene ********************** //
+
+        Scene scene = new Scene();
+        scene.setScreenDistance(50);
+
+        //table
+        scene.addGeometry(bottomOfBox);
+        scene.addGeometry(topOfBox);
+        scene.addGeometry(rightSide);
+        scene.addGeometry(leftSide);
+        scene.addGeometry(backSide);
+        scene.addGeometry(frontSide);
+
+        //and now legs
+        //FrontRightLeg
+        scene.addGeometry(FRLbottomOfBox);
+        scene.addGeometry(FRLtopOfBox);
+        scene.addGeometry(FRLrightSide);
+        scene.addGeometry(FRLleftSide);
+        scene.addGeometry(FRLbackSide);
+        scene.addGeometry(FRLfrontSide);
+        //LeftNearLeg or Front Left Leg
+        scene.addGeometry(FLLbottomOfBox);
+        scene.addGeometry(FLLtopOfBox);
+        scene.addGeometry(FLLrightSide);
+        scene.addGeometry(FLLleftSide);
+        scene.addGeometry(FLLbackSide);
+        scene.addGeometry(FLLfrontSide);
+        //leftFarLeg  or Back Left Leg
+        scene.addGeometry(BLLbottomOfBox);
+        scene.addGeometry(BLLtopOfBox);
+        scene.addGeometry(BLLrightSide);
+        scene.addGeometry(BLLleftSide);
+        scene.addGeometry(BLLbackSide);
+        scene.addGeometry(BLLfrontSide);
+        //Back right Leg
+        scene.addGeometry(BRLbottomOfBox);
+        scene.addGeometry(BRLtopOfBox);
+        scene.addGeometry(BRLrightSide);
+        scene.addGeometry(BRLleftSide);
+        scene.addGeometry(BRLbackSide);
+        scene.addGeometry(BRLfrontSide);
+
+        // ***************** Camera ********************** //
+
+        //It was from the right sight
+        Camera cRight = new Camera(new Point3D(2000,4000,-1500), new Vector(1,0,0),
+                new Vector(0,-1,0));
+        //and now from the left sight
+        Camera cLeft = new Camera(new Point3D(2000,-4000,-1500), new Vector(1,0,0),
+                new Vector(0,1,0));
+        //Now you will see it from the back
+        Camera cBack = new Camera(new Point3D(2000,-0,-4500), new Vector(1,0,0),
+                new Vector(0,0,1));
+        //Now from far right coner
+        Camera cfarRightConer = new Camera(new Point3D(2000,4500,-4500), new Vector(1,0,0),
+                new Vector(0,-1,1));
+        //ftom the far left coner
+        Camera cFarLeftCorner = new Camera(new Point3D(2000,-4500,-4500), new Vector(1,0,0),
+                new Vector(0,1,1));
+        //from the near right coner
+        Camera cNearRightCorner = new Camera(new Point3D(2000,4500,500), new Vector(1,0,0),
+                new Vector(0,-1,-1));
+        //from the left near coner
+        Camera cNearLeftCorner = new Camera(new Point3D(2000,-4500,500), new Vector(1,0,0),
+                new Vector(0,1,-1));
 
 
+        Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+        scene.setCamera(c1);
 
 
+        // ***************** Light ********************** //
+
+        // ***************** ImageWriter and Render********************** //
+
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "BenAndEmanualTable test", 500, 500, 500, 500);
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+        render.writeToImage();
+        //table
+        //and now legs
+        //FrontRightLeg
+        //LeftNearLeg or Front Left Leg
+        //leftFarLeg  or Back Left Leg
+        //Back right Leg
+    }
+
+    @Test
+    public void rightLegTest() {
+        //in Z 200 and in Y 500
+     /*    double x1 = 0,x2 = x1 - 2500;
+        double y1 = -3000,y2 = y1 + 500;
+        double z1 = -1200,z2 = z1 - 50;
+       double X1BackRightLeg = 0, X2FrontRightLeg = -2500;
+        double Y1FrontRightLeg = 2700,Y2FrontRightLeg = 3000;
+        double Z1FrontRightLeg = -1200,Z2FrontRightLeg = -1300;*/
+
+        double X1BackRightLeg = 0, X2BackRightLeg = -2500;
+        double Y1BackRightLeg = 2700,Y2BackRightLeg = 3000;
+        double Z1BackRightLeg = -1200,Z2BackRightLeg = -1300;
+        Point3D BRLtopRightNear = new Point3D(X1BackRightLeg, Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftNear = new Point3D(  X1BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLtopLeftFar = new Point3D(X1BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLtopRightFar = new Point3D(  X1BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
+        Point3D BRLbottomRightNear = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftNear = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z2BackRightLeg);//
+        Point3D BRLbottomLeftFar = new Point3D(X2BackRightLeg, Y1BackRightLeg, Z1BackRightLeg);
+        Point3D BRLbottomRightFar = new Point3D(X2BackRightLeg,  Y2BackRightLeg, Z1BackRightLeg);//
 
 
+        quadrilateral2 bottomOfBox = new quadrilateral2(BRLbottomLeftFar, BRLbottomRightFar, BRLbottomRightNear, BRLbottomLeftNear);
+        quadrilateral2 topOfBox = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLtopRightNear, BRLtopLeftNear);
+        quadrilateral2 rightSide = new quadrilateral2(BRLtopRightFar, BRLtopRightNear, BRLbottomRightNear, BRLbottomRightFar);
+        quadrilateral2 leftSide = new quadrilateral2(BRLtopLeftFar, BRLtopLeftNear, BRLbottomLeftNear, BRLbottomLeftFar);
+        quadrilateral2 backSide = new quadrilateral2(BRLtopLeftFar, BRLtopRightFar, BRLbottomRightFar, BRLbottomLeftFar);
+        quadrilateral2 frontSide = new quadrilateral2(BRLtopLeftNear, BRLtopRightNear, BRLbottomRightNear, BRLbottomLeftNear);
+
+        Color myColor = new Color (186, 185, 124);
+        bottomOfBox.setEmmission(myColor );
+        topOfBox.setEmmission(myColor);
+        rightSide.setEmmission(myColor);
+        leftSide.setEmmission(myColor);
+        backSide.setEmmission(myColor);
+        frontSide.setEmmission(myColor);
+
+        Scene scene = new Scene();
+        scene.setScreenDistance(50);
+        scene.addGeometry(bottomOfBox);
+        scene.addGeometry(topOfBox);
+        scene.addGeometry(rightSide);
+        scene.addGeometry(leftSide);
+        scene.addGeometry(backSide);
+        scene.addGeometry(frontSide);
+
+        Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+        scene.setCamera(c1);
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(200, 200, -100),
+                new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "makerightLegTable test", 500, 500, 500, 500);
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    @Test
+    public void LeftFarLeg(){
+        double leftFarLegX1 = 0,leftFarLegX2 = leftFarLegX1 - 2500;
+        double leftFarLegY1 = -3000 +200,leftFarLegY2 = leftFarLegY1 + 500 +200;
+        double leftFarLegZ1 = -3500 +50 +200,leftFarLegZ2 = leftFarLegZ1 - 50 +200;
+
+        Point3D topRightNear = new Point3D(leftFarLegX1, leftFarLegY2, leftFarLegZ2);//
+        Point3D topLeftNear = new Point3D(  leftFarLegX1,  leftFarLegY1, leftFarLegZ2);//
+        Point3D topLeftFar = new Point3D(leftFarLegX1, leftFarLegY1, leftFarLegZ1);
+        Point3D topRightFar = new Point3D(  leftFarLegX1,  leftFarLegY2, leftFarLegZ1);//
+        Point3D bottomRightNear = new Point3D(leftFarLegX2,  leftFarLegY2, leftFarLegZ2);//
+        Point3D bottomLeftNear = new Point3D(  leftFarLegX2,  leftFarLegY1, leftFarLegZ2);//
+        Point3D bottomLeftFar = new Point3D(leftFarLegX2, leftFarLegY1, leftFarLegZ1);
+        Point3D bottomRightFar = new Point3D(  leftFarLegX2,  leftFarLegY2, leftFarLegZ1);//
+
+        quadrilateral2 bottomOfBox = new quadrilateral2(bottomLeftFar, bottomRightFar, bottomRightNear, bottomLeftNear);
+        quadrilateral2 topOfBox = new quadrilateral2(topLeftFar, topRightFar, topRightNear, topLeftNear);
+        quadrilateral2 rightSide = new quadrilateral2(topRightFar, topRightNear, bottomRightNear, bottomRightFar);
+        quadrilateral2 leftSide = new quadrilateral2(topLeftFar, topLeftNear, bottomLeftNear, bottomLeftFar);
+        quadrilateral2 backSide = new quadrilateral2(topLeftFar, topRightFar, bottomRightFar, bottomLeftFar);
+        quadrilateral2 frontSide = new quadrilateral2(topLeftNear, topRightNear, bottomRightNear, bottomLeftNear);
+
+        Color myColor = new Color (186, 185, 124);
+        bottomOfBox.setEmmission(myColor );
+        topOfBox.setEmmission(myColor);
+        rightSide.setEmmission(myColor);
+        leftSide.setEmmission(myColor);
+        backSide.setEmmission(myColor);
+        frontSide.setEmmission(myColor);
+
+
+        Scene scene = new Scene();
+        scene.setScreenDistance(50);
+        scene.addGeometry(bottomOfBox);
+        scene.addGeometry(topOfBox);
+        scene.addGeometry(rightSide);
+        scene.addGeometry(leftSide);
+        scene.addGeometry(backSide);
+        scene.addGeometry(frontSide);
+
+        Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+        scene.setCamera(c1);
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(200, 200, -100),
+                new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "LeftnFarTableLeg test", 500, 500, 500, 500);
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    @Test
+    public void LeftNearLeg(){
+        double leftNearLegX1 = 0,leftNearLegX2 = leftNearLegX1 - 2500;
+        double leftNearLegY1 = -2800,leftNearLegY2 = leftNearLegY1 + 500;
+        double leftNearLegZ1 = -1200,leftNearLegZ2 = leftNearLegZ1 - 50;
+
+        Point3D topRightNear = new Point3D(leftNearLegX1, leftNearLegY2, leftNearLegZ2);//
+        Point3D topLeftNear = new Point3D(  leftNearLegX1,  leftNearLegY1, leftNearLegZ2);//
+        Point3D topLeftFar = new Point3D(leftNearLegX1, leftNearLegY1, leftNearLegZ1);
+        Point3D topRightFar = new Point3D(  leftNearLegX1,  leftNearLegY2, leftNearLegZ1);//
+        Point3D bottomRightNear = new Point3D(leftNearLegX2,  leftNearLegY2, leftNearLegZ2);//
+        Point3D bottomLeftNear = new Point3D(  leftNearLegX2,  leftNearLegY1, leftNearLegZ2);//
+        Point3D bottomLeftFar = new Point3D(leftNearLegX2, leftNearLegY1, leftNearLegZ1);
+        Point3D bottomRightFar = new Point3D(  leftNearLegX2,  leftNearLegY2, leftNearLegZ1);//
+
+        quadrilateral2 bottomOfBox = new quadrilateral2(bottomLeftFar, bottomRightFar, bottomRightNear, bottomLeftNear);
+        quadrilateral2 topOfBox = new quadrilateral2(topLeftFar, topRightFar, topRightNear, topLeftNear);
+        quadrilateral2 rightSide = new quadrilateral2(topRightFar, topRightNear, bottomRightNear, bottomRightFar);
+        quadrilateral2 leftSide = new quadrilateral2(topLeftFar, topLeftNear, bottomLeftNear, bottomLeftFar);
+        quadrilateral2 backSide = new quadrilateral2(topLeftFar, topRightFar, bottomRightFar, bottomLeftFar);
+        quadrilateral2 frontSide = new quadrilateral2(topLeftNear, topRightNear, bottomRightNear, bottomLeftNear);
+
+        Color myColor = new Color (186, 185, 124);
+        bottomOfBox.setEmmission(myColor );
+        topOfBox.setEmmission(myColor);
+        rightSide.setEmmission(myColor);
+        leftSide.setEmmission(myColor);
+        backSide.setEmmission(myColor);
+        frontSide.setEmmission(myColor);
+
+
+        Scene scene = new Scene();
+        scene.setScreenDistance(50);
+        scene.addGeometry(bottomOfBox);
+        scene.addGeometry(topOfBox);
+        scene.addGeometry(rightSide);
+        scene.addGeometry(leftSide);
+        scene.addGeometry(backSide);
+        scene.addGeometry(frontSide);
+
+        Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
+        scene.setCamera(c1);
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(200, 200, -100),
+                new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "makeleftnearLegTable test", 500, 500, 500, 500);
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+        render.writeToImage();
     }
 
     @Test
@@ -107,6 +501,8 @@ public class quadrantTest {
         Material m = new Material();//0.7,0.8,1,2,8);
         AshCylinderLim myLeg1 = new AshCylinderLim(myRadius,tp,myRay,e,m);*/
 
+//gee i hope the below works.. krosed fingers..
+        rightLegTest();//let see if i can just do this then we can have each part it's own function
 
         Scene scene = new Scene();
         scene.setScreenDistance(50);
