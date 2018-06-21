@@ -23,29 +23,39 @@ public class quadrantTest {
     public void FinalbiuldTableTest() {
 
         // ***************** values ********************** //
-        double X1Table = 500,X2Table = 0;
-        double Y1Table = 3500,Y2Table = -3500;
+        double X1Table = 500  ,X2Table = 0;
+        double Y1Table = 3500 ,Y2Table = -3500;
         double Z1Table = -1000,Z2Table = -3000;
 
+        double LegX1 = X2Table,LegX2 = -2500;//only these number's are correct
+        double Y1RightLeg =  2700,Y2RightLeg =  3000;
+        double Y1leftLeg  = -3200,Y2leftLeg  = -2500;
+        double Z1FrontLeg = -1200,Z2FrontLeg = -1300;
+        double Z1BackLeg  = -3750,Z2BackLeg  = -3500;
         //ok now legs
         //FrontRightLeg
-        double X1FrontRightLeg = 0, X2FrontRightLeg = -2500;
-        double Y1FrontRightLeg = 2700,Y2FrontRightLeg = 3000;
+        double X1FrontRightLeg = LegX1,X2FrontRightLeg = LegX2;
+        double Y1FrontRightLeg =  2700,Y2FrontRightLeg =  3000;
         double Z1FrontRightLeg = -1200,Z2FrontRightLeg = -1300;
 
         //leftNearLeg
-        double leftNearLegX1 = 0,leftNearLegX2 = leftNearLegX1 - 2500;
-        double leftNearLegY1 = -2800,leftNearLegY2 = leftNearLegY1 + 500;
-        double leftNearLegZ1 = -1200,leftNearLegZ2 = leftNearLegZ1 - 50;
+        double leftNearLegX1 = LegX1,leftNearLegX2 = LegX2;//leftNearLegX1 - 2500;
+        double leftNearLegY1 = -2800,leftNearLegY2 = -2300;//leftNearLegY1 + 500;
+        double leftNearLegZ1 = -1200,leftNearLegZ2 =-1300 ;// leftNearLegZ1 - 50;
         //leftFarLeg
-        double leftFarLegX1 = 0,leftFarLegX2 = leftFarLegX1 - 2500;
-        double leftFarLegY1 = -3000 +200,leftFarLegY2 = leftFarLegY1 + 500 +200;
-        double leftFarLegZ1 = -3500 +50 +200,leftFarLegZ2 = leftFarLegZ1 - 50 +200;
+        double leftFarLegX1 = LegX1   ,leftFarLegX2 = LegX2;
+        double leftFarLegY1 = -3200    ,leftFarLegY2 = -2500;
+        double leftFarLegZ1 = -3750    ,leftFarLegZ2 = -3500;
 
         //BackRightLeg  um these numbers arn't right.......
-        double X1BackRightLeg = 0, X2BackRightLeg = -2500;
+        double X1BackRightLeg = LegX1, X2BackRightLeg = LegX2;
         double Y1BackRightLeg = 2700,Y2BackRightLeg = 3000;
         double Z1BackRightLeg = -1200,Z2BackRightLeg = -1300;
+
+        //Flore
+        double FloreBottom =  LegX2;//so that the legs are on the flore nooo it is floor!!!  ok refacter later....
+        double FloreY1 = -10000,FloreY2 = 10000;
+        double FloreZ1 = 10000,FloreZ2 = -10000;
 
         // ***************** Point3D ********************** //
         //table
@@ -146,6 +156,7 @@ public class quadrantTest {
         Color FLLColor = new Color (0, 0, 250);
         Color BLLColor = new Color (250, 0, 0);
         Color BRLColor = new Color (186, 185, 124);
+        Color FloreColor = new Color (39, 75, 78);
        /* Color TableColor = new Color (186, 185, 124);
         Color FRLColor = new Color (186, 185, 124);
         Color FLLColor = new Color (186, 185, 124);
@@ -259,12 +270,27 @@ public class quadrantTest {
         Camera cNearLeftCorner = new Camera(new Point3D(2000,-4500,500), new Vector(1,0,0),
                 new Vector(0,1,-1));
 
-
         Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
-        scene.setCamera(c1);
+        scene.setCamera(cfarRightConer);
 
 
         // ***************** Light ********************** //
+
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, -200, -150),
+                new Vector(2, 2, -3), 0.1, 0.00001, 0.000005));
+
+        scene.addLight(new SpotLight(new Color(255, 100, 100), new Point3D(-200, -200, -100),
+                new Vector(2, 2, -3), 0, 0.00001, 0.000005));
+
+        // ***************** Flore ********************** //
+        Point3D bottomRightNearFloreConer = new Point3D(FloreBottom,  FloreY2, FloreZ2);//
+        Point3D bottomLeftNearFloreConer = new Point3D(  FloreBottom,  FloreY1, FloreZ2);//
+        Point3D bottomLeftFarFloreConer = new Point3D(FloreBottom, FloreY1, FloreZ1);
+        Point3D bottomRightFarFloreConer = new Point3D(  FloreBottom,  FloreY2, FloreZ1);//
+        quadrilateral2 flore = new quadrilateral2(bottomLeftFarFloreConer, bottomRightFarFloreConer, bottomRightNearFloreConer, bottomLeftNearFloreConer);
+        flore.setEmmission(FloreColor);
+        scene.addGeometry(flore);
+
 
         // ***************** ImageWriter and Render********************** //
 
