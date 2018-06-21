@@ -28,14 +28,14 @@ public class quadrantTest {
         double Z1Table = -1000,Z2Table = -3000;
 
         double LegX1 = X2Table,LegX2 = -2500;//only these number's are correct
-        double Y1RightLeg =  2700,Y2RightLeg =  3000;
+        double Y1RightLeg =  2700,Y2RightLeg =  3000;//really this is aY +c but for simple just make it Y same for all of them..
         double Y1leftLeg  = -3200,Y2leftLeg  = -2500;
         double Z1FrontLeg = -1200,Z2FrontLeg = -1300;
-        double Z1BackLeg  = -3750,Z2BackLeg  = -3500;
+        double Z1BackLeg  = -3300,Z2BackLeg  = -3200;
         //ok now legs
         //FrontRightLeg
         double X1FrontRightLeg = LegX1,X2FrontRightLeg = LegX2;
-        double Y1FrontRightLeg =  2700,Y2FrontRightLeg =  3000;
+        double Y1FrontRightLeg =  Y1RightLeg,Y2FrontRightLeg =  Y2RightLeg;
         double Z1FrontRightLeg = -1200,Z2FrontRightLeg = -1300;
 
         //leftNearLeg
@@ -49,8 +49,8 @@ public class quadrantTest {
 
         //BackRightLeg  um these numbers arn't right.......
         double X1BackRightLeg = LegX1, X2BackRightLeg = LegX2;
-        double Y1BackRightLeg = 2700,Y2BackRightLeg = 3000;
-        double Z1BackRightLeg = -1200,Z2BackRightLeg = -1300;
+        double Y1BackRightLeg = Y1RightLeg,Y2BackRightLeg = Y2RightLeg;
+        double Z1BackRightLeg = -3400,Z2BackRightLeg = -3300;
 
         //Flore
         double FloreBottom =  LegX2;//so that the legs are on the flore nooo it is floor!!!  ok refacter later....
@@ -271,8 +271,9 @@ public class quadrantTest {
                 new Vector(0,1,-1));
 
         Camera c1 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
-        scene.setCamera(cfarRightConer);
-
+        scene.setCamera(cBack);
+        String camaraName = "cBack";
+        Camera c2 = new Camera(new Point3D(2000,0,0), new Vector(1,0,0), new Vector(0,0,-1));
 
         // ***************** Light ********************** //
 
@@ -294,7 +295,7 @@ public class quadrantTest {
 
         // ***************** ImageWriter and Render********************** //
 
-        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "BenAndEmanualTable test", 500, 500, 500, 500);
+        ImageWriter imageWriter = new ImageWriter(IMAGES_TEST_DIR + "BenAndEmanualTable test"+camaraName , 500, 500, 500, 500);
         Render render = new Render(imageWriter, scene);
         render.renderImage();
         render.writeToImage();

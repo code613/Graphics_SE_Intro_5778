@@ -22,6 +22,13 @@ import main.scenes.*;
 
 
 public class quadratTest {
+   // double LegX1 = X2Table,LegX2 = -2500;//alright i don't understand anymore how so little numbers build all this...
+
+  /*  //THESE ARE THE CRITICAL NUMBERS....BEWARE....
+    double Y1RightLeg =  2700,Y2RightLeg =  3000;//really this is aY +c but for simple just make it Y same for all of them..
+    double Y1leftLeg  = -3200,Y2leftLeg  = -2500;
+    double Z1FrontLeg = -1200,Z2FrontLeg = -1300;
+    double Z1BackLeg  = -3300,Z2BackLeg  = -3200;*/
         @Test
         void testGetNormal() {
             int z1 = -10,z2 = -20;
